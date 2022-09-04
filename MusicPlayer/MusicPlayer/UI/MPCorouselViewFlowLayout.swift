@@ -23,7 +23,7 @@ class MPCorouselViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        guard let collectionView = collectionView as? MPCollectionView,
+        guard let collectionView = collectionView as? MPCorouselCollectionView,
               let currentCell = collectionView.visibleCells.first else {
             return proposedContentOffset }
         
@@ -57,7 +57,7 @@ class MPCorouselViewFlowLayout: UICollectionViewFlowLayout {
     }
 
     func transformCell(cells: [UICollectionViewLayoutAttributes]) {
-        guard let collectionView = collectionView as? MPCollectionView else { return }
+        guard let collectionView = collectionView as? MPCorouselCollectionView else { return }
         for cell in cells {
             if cell.indexPath != IndexPath(row: Int(collectionView.indexOfPresentedCell), section: 0) {
             }

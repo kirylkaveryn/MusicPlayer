@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		EDDDACDB28C4E7AB008207BF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDACDA28C4E7AB008207BF /* AppDelegate.swift */; };
 		EDDDACDD28C4E7AB008207BF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDACDC28C4E7AB008207BF /* SceneDelegate.swift */; };
-		EDDDACDF28C4E7AB008207BF /* MPPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDACDE28C4E7AB008207BF /* MPPlayerViewController.swift */; };
+		EDDDACDF28C4E7AB008207BF /* MPPlayerScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDACDE28C4E7AB008207BF /* MPPlayerScreenViewController.swift */; };
 		EDDDACE228C4E7AB008207BF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDDDACE028C4E7AB008207BF /* Main.storyboard */; };
 		EDDDACE428C4E7AD008207BF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EDDDACE328C4E7AD008207BF /* Assets.xcassets */; };
 		EDDDACE728C4E7AD008207BF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EDDDACE528C4E7AD008207BF /* LaunchScreen.storyboard */; };
@@ -17,7 +17,11 @@
 		EDDDACFC28C4E7AE008207BF /* MusicPlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDACFB28C4E7AE008207BF /* MusicPlayerUITests.swift */; };
 		EDDDACFE28C4E7AE008207BF /* MusicPlayerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDACFD28C4E7AE008207BF /* MusicPlayerUITestsLaunchTests.swift */; };
 		EDDDAD0C28C4EC02008207BF /* MPCorouselViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD0B28C4EC02008207BF /* MPCorouselViewFlowLayout.swift */; };
-		EDDDAD0E28C4EC7C008207BF /* MPCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD0D28C4EC7C008207BF /* MPCollectionView.swift */; };
+		EDDDAD0E28C4EC7C008207BF /* MPCorouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD0D28C4EC7C008207BF /* MPCorouselCollectionView.swift */; };
+		EDDDAD1228C509D5008207BF /* MPCorouselCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD1028C509D5008207BF /* MPCorouselCollectionViewCell.swift */; };
+		EDDDAD1328C509D5008207BF /* MPCorouselCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDDDAD1128C509D5008207BF /* MPCorouselCollectionViewCell.xib */; };
+		EDDDAD1528C50B8C008207BF /* MPPlayerScreenPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD1428C50B8C008207BF /* MPPlayerScreenPresenter.swift */; };
+		EDDDAD1828C51921008207BF /* MPAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD1728C51921008207BF /* MPAudioPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,7 +45,7 @@
 		EDDDACD728C4E7AB008207BF /* MusicPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MusicPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDDDACDA28C4E7AB008207BF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EDDDACDC28C4E7AB008207BF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		EDDDACDE28C4E7AB008207BF /* MPPlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPlayerViewController.swift; sourceTree = "<group>"; };
+		EDDDACDE28C4E7AB008207BF /* MPPlayerScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPlayerScreenViewController.swift; sourceTree = "<group>"; };
 		EDDDACE128C4E7AB008207BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EDDDACE328C4E7AD008207BF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EDDDACE628C4E7AD008207BF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -52,7 +56,11 @@
 		EDDDACFB28C4E7AE008207BF /* MusicPlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerUITests.swift; sourceTree = "<group>"; };
 		EDDDACFD28C4E7AE008207BF /* MusicPlayerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		EDDDAD0B28C4EC02008207BF /* MPCorouselViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCorouselViewFlowLayout.swift; sourceTree = "<group>"; };
-		EDDDAD0D28C4EC7C008207BF /* MPCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCollectionView.swift; sourceTree = "<group>"; };
+		EDDDAD0D28C4EC7C008207BF /* MPCorouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCorouselCollectionView.swift; sourceTree = "<group>"; };
+		EDDDAD1028C509D5008207BF /* MPCorouselCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCorouselCollectionViewCell.swift; sourceTree = "<group>"; };
+		EDDDAD1128C509D5008207BF /* MPCorouselCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MPCorouselCollectionViewCell.xib; sourceTree = "<group>"; };
+		EDDDAD1428C50B8C008207BF /* MPPlayerScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPlayerScreenPresenter.swift; sourceTree = "<group>"; };
+		EDDDAD1728C51921008207BF /* MPAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAudioPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +111,7 @@
 		EDDDACD928C4E7AB008207BF /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
+				EDDDAD1628C51910008207BF /* Services */,
 				EDDDAD0A28C4EBAE008207BF /* UI */,
 				EDDDACDA28C4E7AB008207BF /* AppDelegate.swift */,
 				EDDDACDC28C4E7AB008207BF /* SceneDelegate.swift */,
@@ -134,11 +143,30 @@
 			isa = PBXGroup;
 			children = (
 				EDDDACE028C4E7AB008207BF /* Main.storyboard */,
-				EDDDACDE28C4E7AB008207BF /* MPPlayerViewController.swift */,
+				EDDDAD1428C50B8C008207BF /* MPPlayerScreenPresenter.swift */,
+				EDDDACDE28C4E7AB008207BF /* MPPlayerScreenViewController.swift */,
 				EDDDAD0B28C4EC02008207BF /* MPCorouselViewFlowLayout.swift */,
-				EDDDAD0D28C4EC7C008207BF /* MPCollectionView.swift */,
+				EDDDAD0D28C4EC7C008207BF /* MPCorouselCollectionView.swift */,
+				EDDDAD0F28C509B9008207BF /* Cell */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		EDDDAD0F28C509B9008207BF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				EDDDAD1028C509D5008207BF /* MPCorouselCollectionViewCell.swift */,
+				EDDDAD1128C509D5008207BF /* MPCorouselCollectionViewCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		EDDDAD1628C51910008207BF /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				EDDDAD1728C51921008207BF /* MPAudioPlayer.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,6 +275,7 @@
 			files = (
 				EDDDACE728C4E7AD008207BF /* LaunchScreen.storyboard in Resources */,
 				EDDDACE428C4E7AD008207BF /* Assets.xcassets in Resources */,
+				EDDDAD1328C509D5008207BF /* MPCorouselCollectionViewCell.xib in Resources */,
 				EDDDACE228C4E7AB008207BF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -272,11 +301,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EDDDACDF28C4E7AB008207BF /* MPPlayerViewController.swift in Sources */,
+				EDDDAD1528C50B8C008207BF /* MPPlayerScreenPresenter.swift in Sources */,
+				EDDDACDF28C4E7AB008207BF /* MPPlayerScreenViewController.swift in Sources */,
 				EDDDACDB28C4E7AB008207BF /* AppDelegate.swift in Sources */,
 				EDDDACDD28C4E7AB008207BF /* SceneDelegate.swift in Sources */,
 				EDDDAD0C28C4EC02008207BF /* MPCorouselViewFlowLayout.swift in Sources */,
-				EDDDAD0E28C4EC7C008207BF /* MPCollectionView.swift in Sources */,
+				EDDDAD0E28C4EC7C008207BF /* MPCorouselCollectionView.swift in Sources */,
+				EDDDAD1228C509D5008207BF /* MPCorouselCollectionViewCell.swift in Sources */,
+				EDDDAD1828C51921008207BF /* MPAudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,11 +10,11 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Player View Controller-->
+        <!--Player Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <viewController id="BYZ-38-t0r" customClass="MPPlayerViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MPPlayerScreenViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,6 +55,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="73" height="100"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="backward.end" catalog="system"/>
+                                        <connections>
+                                            <action selector="backwardButtonDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Llr-R4-LJB"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLz-mv-yPJ">
                                         <rect key="frame" x="73" y="0.0" width="68" height="100"/>
@@ -62,18 +65,24 @@
                                         <buttonConfiguration key="configuration" style="plain">
                                             <imageReference key="image" image="play.fill" catalog="system" symbolScale="large"/>
                                         </buttonConfiguration>
+                                        <connections>
+                                            <action selector="playButtonDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="527-sG-lM3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LuC-mT-hdC">
                                         <rect key="frame" x="141" y="0.0" width="73" height="100"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" image="forward.end" catalog="system"/>
+                                        <connections>
+                                            <action selector="forwardButtonDidTap:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GP9-OC-mIt"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="onA-1S-SC1"/>
                                 </constraints>
                             </stackView>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pyv-X8-T4b" customClass="MPCollectionView" customModule="MusicPlayer" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pyv-X8-T4b" customClass="MPCorouselCollectionView" customModule="MusicPlayer" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="94" width="414" height="414"/>
                                 <color key="backgroundColor" red="0.30840110780000002" green="0.5618229508" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -110,7 +119,7 @@
                     <connections>
                         <outlet property="artistLabel" destination="6MZ-b9-oMp" id="0wf-vY-vvi"/>
                         <outlet property="backwardPlayerButton" destination="Y9G-Vs-nXV" id="WhC-Je-DzM"/>
-                        <outlet property="corouselCollectionView" destination="pyv-X8-T4b" id="DnD-Jl-CgG"/>
+                        <outlet property="collectionView" destination="pyv-X8-T4b" id="DnD-Jl-CgG"/>
                         <outlet property="forwardPlayerButton" destination="LuC-mT-hdC" id="Uxg-iD-AK0"/>
                         <outlet property="playPlayerButtom" destination="PLz-mv-yPJ" id="erW-4F-ihu"/>
                         <outlet property="playedTime" destination="K6T-D7-H5s" id="hLX-cB-jm9"/>

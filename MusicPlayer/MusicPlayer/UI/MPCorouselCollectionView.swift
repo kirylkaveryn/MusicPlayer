@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MPCollectionView: UICollectionView {
+class MPCorouselCollectionView: UICollectionView {
 
     var indexOfPresentedCell = 0
     

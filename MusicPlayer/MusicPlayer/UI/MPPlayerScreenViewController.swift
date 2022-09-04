@@ -7,12 +7,9 @@
 
 import UIKit
 
-class MPPlayerViewController: UIViewController {
-    
-    private let interitemSpace: CGFloat = 30
-    private let cellContentInset = UIEdgeInsets(top: 60, left: 60, bottom: 60, right: 60)
+class MPPlayerScreenViewController: UIViewController {
 
-    @IBOutlet weak var corouselCollectionView: MPCollectionView!
+    @IBOutlet weak var collectionView: MPCorouselCollectionView!
     @IBOutlet weak var songLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var playedTime: UILabel!
@@ -22,28 +19,50 @@ class MPPlayerViewController: UIViewController {
     @IBOutlet weak var forwardPlayerButton: UIButton!
     @IBOutlet weak var progressBar: UIProgressView!
     
+    
+    private var presenter: MPPlayerScreenPresenterProcol?
+    private let interitemSpace: CGFloat = 30
+    private let cellContentInset = UIEdgeInsets(top: 60, left: 60, bottom: 60, right: 60)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
     }
     
+    func configure(presenter: MPPlayerScreenPresenterProcol) {
+        self.presenter = presenter
+    }
+
     private func setupCollectionView() {
-        corouselCollectionView.delegate = self
-        corouselCollectionView.dataSource = self
-        corouselCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: MPCorouselCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: MPCorouselCollectionViewCell.reuseID)
+    }
+    
+    
+    @IBAction func playButtonDidTap(_ sender: Any) {
+        presenter?.playButtonDidTap()
+    }
+    
+    @IBAction func backwardButtonDidTap(_ sender: Any) {
+        presenter?.backwardButtonDidTap()
+    }
+    
+    @IBAction func forwardButtonDidTap(_ sender: Any) {
+        presenter?.forwardButtonDidTap()
     }
 
 }
 
 // MARK: CollectionView DataSource
-extension MPPlayerViewController: UICollectionViewDataSource {
+extension MPPlayerScreenViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MPCorouselCollectionViewCell.reuseID, for: indexPath)
+
         
         return cell
     }
@@ -52,7 +71,7 @@ extension MPPlayerViewController: UICollectionViewDataSource {
 
 // MARK: CollectionView Delegate
 
-extension MPPlayerViewController: UICollectionViewDelegateFlowLayout {
+extension MPPlayerScreenViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: collectionView.frame.width - cellContentInset.left - cellContentInset.right, height: collectionView.frame.height - cellContentInset.top - cellContentInset.bottom)
     }
@@ -82,5 +101,6 @@ extension MPPlayerViewController: UICollectionViewDelegateFlowLayout {
 //        return index
 //    }
 }
+
 
 
