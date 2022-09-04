@@ -19,7 +19,6 @@ class MPPlayerScreenViewController: UIViewController {
     @IBOutlet weak var forwardPlayerButton: UIButton!
     @IBOutlet weak var progressBar: UIProgressView!
     
-    
     private var presenter: MPPlayerScreenPresenterProcol?
     private let interitemSpace: CGFloat = 30
     private let cellContentInset = UIEdgeInsets(top: 60, left: 60, bottom: 60, right: 60)

@@ -26,12 +26,28 @@ protocol MPAudioPlayerProtocol {
 
 class MPAudioPlayer: MPAudioPlayerProtocol {
     
-    private var audioPlayer: AVQueuePlayer?
+    private var audioPlayer: AVPlayer
     private var playerItems: [AVPlayerItem] = [
-        AVPlayerItem(url: URL(string: Bundle.main.path(forResource: "song1", ofType: "mp3")!)!),
-        AVPlayerItem(url: URL(string: Bundle.main.path(forResource: "song2", ofType: "mp3")!)!),
-        AVPlayerItem(url: URL(string: Bundle.main.path(forResource: "song3", ofType: "mp3")!)!)
+        AVPlayerItem(url: Bundle.main.url(forResource: "song1", withExtension: "mp3")!),
+        AVPlayerItem(url: Bundle.main.url(forResource: "song2", withExtension: "mp3")!),
+        AVPlayerItem(url: Bundle.main.url(forResource: "song3", withExtension: "mp3")!)
     ]
+    private var currentItem: AVPlayerItem {
+        didSet {
+            audioPlayer.replaceCurrentItem(with: currentItem)
+            currentItem.seek(to: .zero) { [weak self] _ in
+                guard let self = self else { return }
+                self.audioPlayer.play()
+            }
+            
+        }
+    }
+    private var currentItemIndex: Int {
+        get {
+            guard let index = playerItems.firstIndex(of: currentItem) else { return 0 }
+            return index
+        }
+    }
     
     var songs: [MPSongModel] {
         // FIXME: - parser from AVPlayerItem to MPSongModel
@@ -49,31 +65,37 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
             ]
         }
     }
-
-    private func setupAudioPlayer() {
-        
+    
+    init() {
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         try? AVAudioSession.sharedInstance().setActive(true)
-        
-        audioPlayer = AVQueuePlayer(items: playerItems)
+        currentItem = playerItems.first!
+        audioPlayer = AVPlayer(playerItem: currentItem)
     }
-    
+
     func play() {
-        audioPlayer?.play()
+        audioPlayer.play()
 
     }
     
     func pause() {
-        audioPlayer?.pause()
+        audioPlayer.pause()
     }
     
     func goForward() {
-        audioPlayer?.advanceToNextItem()
+        if currentItemIndex < playerItems.count - 1 {
+            currentItem = playerItems[currentItemIndex + 1]
+        } else if currentItemIndex == (playerItems.count - 1) {
+            currentItem = playerItems.first!
+        }
     }
     
     func goBack() {
-        guard let currentItem = audioPlayer?.currentItem, let currentItemIndex = playerItems.firstIndex(of: currentItem) else { return }
-        audioPlayer?.advanceToPreviousItem(for: currentItemIndex, with: playerItems)
+        if currentItemIndex > 0 {
+            currentItem = playerItems[currentItemIndex - 1]
+        } else if currentItemIndex == 0 {
+            currentItem = playerItems.last!
+        }
     }
     
 }
