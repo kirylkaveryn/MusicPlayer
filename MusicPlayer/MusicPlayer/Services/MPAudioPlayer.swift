@@ -17,6 +17,7 @@ struct MPSongModel {
 
 protocol MPAudioPlayerProtocol {
     var songs: [MPSongModel] { get }
+    var songDidChange: ((MPSongModel) -> ())? { get set }
 
     func play()
     func pause()
@@ -25,6 +26,7 @@ protocol MPAudioPlayerProtocol {
 }
 
 class MPAudioPlayer: MPAudioPlayerProtocol {
+    var songDidChange: ((MPSongModel) -> ())?
     
     private var audioPlayer: AVPlayer
     private var playerItems: [AVPlayerItem] = [
@@ -38,6 +40,7 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
             currentItem.seek(to: .zero) { [weak self] _ in
                 guard let self = self else { return }
                 self.audioPlayer.play()
+                self.songDidChange?(self.songs[self.currentItemIndex])
             }
             
         }
@@ -75,7 +78,6 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
 
     func play() {
         audioPlayer.play()
-
     }
     
     func pause() {
@@ -99,18 +101,4 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
     }
     
 }
-
-extension AVQueuePlayer {
-    func advanceToPreviousItem(for currentItem: Int, with initialItems: [AVPlayerItem]) {
-        self.removeAllItems()
-        for i in currentItem..<initialItems.count {
-            let obj: AVPlayerItem? = initialItems[i]
-            if self.canInsert(obj!, after: nil) {
-                obj?.seek(to: CMTime.zero, completionHandler: nil)
-                self.insert(obj!, after: nil)
-            }
-        }
-    }
-}
-
 

@@ -26,10 +26,21 @@ class MPPlayerScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupCollectionView()
+        
+        guard let initaialSongModel = presenter?.songs.first else { return }
+        self.songLabel.text = initaialSongModel.title
+        self.artistLabel.text = initaialSongModel.title
+        
     }
     
     func configure(presenter: MPPlayerScreenPresenterProcol) {
         self.presenter = presenter
+
+        presenter.songDidChange = { [weak self] songModel in
+            guard let self = self else { return }
+            self.songLabel.text = songModel.title
+            self.artistLabel.text = songModel.title
+        }
     }
 
     private func setupCollectionView() {
@@ -56,13 +67,11 @@ class MPPlayerScreenViewController: UIViewController {
 // MARK: CollectionView DataSource
 extension MPPlayerScreenViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        3
+        presenter?.songs.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MPCorouselCollectionViewCell.reuseID, for: indexPath)
-
-        
         return cell
     }
 }
