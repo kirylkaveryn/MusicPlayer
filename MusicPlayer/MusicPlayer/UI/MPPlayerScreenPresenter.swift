@@ -21,6 +21,7 @@ protocol MPPlayerScreenPresenterProtocol: AnyObject {
     func pauseButtonDidTap()
     func backwardButtonDidTap()
     func forwardButtonDidTap()
+    func goToSong(inex: Int)
 }
 
 class MPPlayerScreenPresenter: MPPlayerScreenPresenterProtocol {
@@ -79,5 +80,9 @@ class MPPlayerScreenPresenter: MPPlayerScreenPresenterProtocol {
     
     func forwardButtonDidTap() {
         audioPlayer.goForward()
+    }
+    
+    func goToSong(inex: Int) {
+        audioPlayer.goToSong(inex: inex)
     }
 }

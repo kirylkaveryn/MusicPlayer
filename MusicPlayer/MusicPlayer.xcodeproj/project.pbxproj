@@ -26,7 +26,6 @@
 		EDDDAD1F28C52032008207BF /* song1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDDAD1C28C52032008207BF /* song1.mp3 */; };
 		EDDDAD2128C52B57008207BF /* song3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDDAD2028C52B56008207BF /* song3.mp3 */; };
 		EDDDAD2428C62948008207BF /* CMTime+StringRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD2328C62948008207BF /* CMTime+StringRepresentation.swift */; };
-		EDDDAD2628C62D4D008207BF /* MPProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD2528C62D4D008207BF /* MPProgressView.swift */; };
 		EDDDAD2828C64ED2008207BF /* MPPlayerControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD2728C64ED2008207BF /* MPPlayerControlButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -71,7 +70,6 @@
 		EDDDAD1C28C52032008207BF /* song1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song1.mp3; path = ../../../song1.mp3; sourceTree = "<group>"; };
 		EDDDAD2028C52B56008207BF /* song3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song3.mp3; path = ../../../song3.mp3; sourceTree = "<group>"; };
 		EDDDAD2328C62948008207BF /* CMTime+StringRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime+StringRepresentation.swift"; sourceTree = "<group>"; };
-		EDDDAD2528C62D4D008207BF /* MPProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPProgressView.swift; sourceTree = "<group>"; };
 		EDDDAD2728C64ED2008207BF /* MPPlayerControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPPlayerControlButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -159,7 +157,6 @@
 				EDDDACE028C4E7AB008207BF /* Main.storyboard */,
 				EDDDAD1428C50B8C008207BF /* MPPlayerScreenPresenter.swift */,
 				EDDDACDE28C4E7AB008207BF /* MPPlayerScreenViewController.swift */,
-				EDDDAD2528C62D4D008207BF /* MPProgressView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -355,7 +352,6 @@
 				EDDDAD2428C62948008207BF /* CMTime+StringRepresentation.swift in Sources */,
 				EDDDAD1228C509D5008207BF /* MPCorouselCollectionViewCell.swift in Sources */,
 				EDDDAD2828C64ED2008207BF /* MPPlayerControlButton.swift in Sources */,
-				EDDDAD2628C62D4D008207BF /* MPProgressView.swift in Sources */,
 				EDDDAD1828C51921008207BF /* MPAudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

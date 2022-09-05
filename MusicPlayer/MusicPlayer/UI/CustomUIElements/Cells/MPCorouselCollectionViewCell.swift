@@ -20,7 +20,8 @@ class MPCorouselCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupContentView() {
-        contentView.backgroundColor = .white.withAlphaComponent(0.03)
+        contentView.tintColor = .white.withAlphaComponent(0.3)
+        contentView.backgroundColor = .white.withAlphaComponent(0.1)
         contentView.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
         contentView.layer.borderWidth = 2
         contentView.layer.cornerRadius = 20

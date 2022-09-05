@@ -30,6 +30,7 @@ protocol MPAudioPlayerProtocol {
     func pause()
     func goForward()
     func goBack()
+    func goToSong(inex: Int)
 }
 
 class MPAudioPlayer: MPAudioPlayerProtocol {
@@ -79,7 +80,6 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         // sutup progress bar updating with timer
         audioPlayer.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 60), queue: .main) { [weak self] time in
             guard let self = self, let currentItem = self.audioPlayer.currentItem else { return }
-            print(currentItem.asset.duration)
             let progress = Progress(duration: currentItem.asset.duration,
                                     currentTime: time)
             self.progressDidChange?(progress)
@@ -130,6 +130,11 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         play()
     }
     
+    func goToSong(inex: Int) {
+        guard (0...playerItems.count - 1).contains(inex) else { return }
+        currentItem = playerItems[inex]
+    }
+    
     /// Parse AVPlayerItem to MPSongModel with asset keys.
     private func getSongModelFrom(_ playerItem: AVPlayerItem) -> MPSongModel {
         
@@ -138,10 +143,10 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         let artworkData = AVMetadataItem.metadataItems(from: playerItem.asset.commonMetadata, withKey: AVMetadataKey.commonKeyArtwork, keySpace: AVMetadataKeySpace.common).first?.value as? Data
         
         var artwork: UIImage
-        if let artworkData = artworkData {
-            artwork = UIImage(data: artworkData) ?? UIImage(systemName: "person")!
+        if let artworkData = artworkData, let image = UIImage(data: artworkData) {
+            artwork = image
         } else {
-            artwork = UIImage(systemName: "person")!
+            artwork = UIImage(systemName: "music.note.list")!
         }
 
         let songModel = MPSongModel(title: title ?? "unknown",

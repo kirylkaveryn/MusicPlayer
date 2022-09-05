@@ -65,12 +65,7 @@ class MPPlayerScreenViewController: UIViewController {
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: MPCorouselCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: MPCorouselCollectionViewCell.reuseID)
     }
-    
-//    private func setupProgressBar() {
-////        progressBar.progressImage = UIImage(systemName: "circle.fill")
-//    }
-//
-    
+
     @IBAction func playButtonDidTap(_ sender: Any) {
         presenter?.playButtonDidTap()
     }
@@ -100,7 +95,6 @@ extension MPPlayerScreenViewController: UICollectionViewDataSource {
 
 
 // MARK: CollectionView Delegate
-
 extension MPPlayerScreenViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: collectionView.frame.width - cellContentInset.left - cellContentInset.right, height: collectionView.frame.height - cellContentInset.top - cellContentInset.bottom)
@@ -111,25 +105,24 @@ extension MPPlayerScreenViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        guard let collectionView = scrollView as? MPCollectionView else { return }
-//        if collectionView.contentOffset.x < -50 {
-//            collectionView.scrollToItem(at: IndexPath(row: FillingData.data.count - 1, section: 0), at: .centeredHorizontally, animated: true)
-//        }
-//
-//        else if collectionView.contentOffset.x + cellWidth * 1.5 - 50 > collectionView.contentSize.width {
-//            collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
-//        }
-//
-//        collectionView.indexOfPresentedCell = getindexOfPresentedCell(positionX: collectionView.contentOffset.x)
-//        changePlayArrow(index: indexOfPresentedCell)
+        guard let collectionView = scrollView as? MPCorouselCollectionView,
+        let presenter = presenter,
+        let currentCell = collectionView.visibleCells.first else { return }
+        
+        let delta: CGFloat = 50
+        let cellWidth = currentCell.bounds.width
+
+        if collectionView.contentOffset.x < -delta {
+            collectionView.scrollToItem(at: IndexPath(row: presenter.songsCount - 1, section: 0), at: .centeredHorizontally, animated: true)
+        } else if collectionView.contentOffset.x + cellWidth * 1.5 - delta > collectionView.contentSize.width {
+            collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: true)
+        }
+        
+        let offset = collectionView.contentOffset.x / cellWidth
+        let index = Int(round(offset))
+        presenter.goToSong(inex: index)
     }
-//
-//    private func getindexOfPresentedCell(positionX: CGFloat) -> Int {
-//        let cellWidth: CGFloat = cellWidth + 20
-//        let offset = positionX / cellWidth
-//        let index = Int(round(offset))
-//        return index
-//    }
+
 }
 
 
