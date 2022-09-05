@@ -25,6 +25,7 @@
 		EDDDAD1E28C52032008207BF /* song2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDDAD1B28C52032008207BF /* song2.mp3 */; };
 		EDDDAD1F28C52032008207BF /* song1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDDAD1C28C52032008207BF /* song1.mp3 */; };
 		EDDDAD2128C52B57008207BF /* song3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDDAD2028C52B56008207BF /* song3.mp3 */; };
+		EDDDAD2428C62948008207BF /* CMTime+StringRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD2328C62948008207BF /* CMTime+StringRepresentation.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		EDDDAD1B28C52032008207BF /* song2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song2.mp3; path = ../../../song2.mp3; sourceTree = "<group>"; };
 		EDDDAD1C28C52032008207BF /* song1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song1.mp3; path = ../../../song1.mp3; sourceTree = "<group>"; };
 		EDDDAD2028C52B56008207BF /* song3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song3.mp3; path = ../../../song3.mp3; sourceTree = "<group>"; };
+		EDDDAD2328C62948008207BF /* CMTime+StringRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime+StringRepresentation.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 			isa = PBXGroup;
 			children = (
 				EDDDAD1728C51921008207BF /* MPAudioPlayer.swift */,
+				EDDDAD2228C62926008207BF /* Extensions */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -184,6 +187,14 @@
 				EDDDAD2028C52B56008207BF /* song3.mp3 */,
 			);
 			path = Resourses;
+			sourceTree = "<group>";
+		};
+		EDDDAD2228C62926008207BF /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				EDDDAD2328C62948008207BF /* CMTime+StringRepresentation.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -327,6 +338,7 @@
 				EDDDACDD28C4E7AB008207BF /* SceneDelegate.swift in Sources */,
 				EDDDAD0C28C4EC02008207BF /* MPCorouselViewFlowLayout.swift in Sources */,
 				EDDDAD0E28C4EC7C008207BF /* MPCorouselCollectionView.swift in Sources */,
+				EDDDAD2428C62948008207BF /* CMTime+StringRepresentation.swift in Sources */,
 				EDDDAD1228C509D5008207BF /* MPCorouselCollectionViewCell.swift in Sources */,
 				EDDDAD1828C51921008207BF /* MPAudioPlayer.swift in Sources */,
 			);

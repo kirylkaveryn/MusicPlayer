@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreMedia
 
 class MPPlayerScreenViewController: UIViewController {
 
@@ -41,7 +42,13 @@ class MPPlayerScreenViewController: UIViewController {
         
         presenter.progressDidChange = { [weak self] progress in
             guard let self = self else { return }
-            self.progressBar.progress = Float(progress)
+            let fraction = CMTimeGetSeconds(progress.currentTime) / CMTimeGetSeconds(progress.duration)
+            // handle unexpected NaN value
+            if !fraction.isNaN {
+                self.progressBar.progress = Float(fraction)
+                self.playedTime.text = progress.currentTime.positionalTime
+                self.remainingTIme.text = (progress.duration - progress.currentTime).positionalTime
+            }
         }
     }
 

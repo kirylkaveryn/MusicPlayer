@@ -16,11 +16,15 @@ struct MPSongModel {
     let image: UIImage = UIImage(systemName: "person")!
 }
 
+struct Progress {
+    let duration: CMTime
+    let currentTime: CMTime
+}
 
 protocol MPAudioPlayerProtocol {
     var songs: [MPSongModel] { get }
     var songDidChange: ((MPSongModel) -> ())? { get set }
-    var progressDidChange: ((Double) -> ())? { get set }
+    var progressDidChange: ((Progress) -> ())? { get set }
 
     func setupPlayer(songURLs: [URL])
     func play()
@@ -31,7 +35,7 @@ protocol MPAudioPlayerProtocol {
 
 class MPAudioPlayer: MPAudioPlayerProtocol {
     var songDidChange: ((MPSongModel) -> ())?
-    var progressDidChange: ((Double) -> ())?
+    var progressDidChange: ((Progress) -> ())?
 
     private var audioPlayer: AVPlayer
     private var playerItems: [AVPlayerItem] = []
@@ -43,11 +47,10 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         didSet {
             guard let currentItem = currentItem,
                   let currentItemIndex = currentItemIndex else { return }
-            // create new player
+            // create new player and start playing
             audioPlayer.replaceCurrentItem(with: currentItem)
-            
-            self.songDidChange?(self.songs[currentItemIndex])
-            self.audioPlayer.play()
+            songDidChange?(self.songs[currentItemIndex])
+            audioPlayer.play()
         }
     }
     private var currentItemIndex: Int? {
@@ -89,10 +92,11 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         // sutup progress bar updating with timer
         audioPlayer.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 60), queue: .main) { [weak self] time in
             guard let self = self, let currentItem = self.audioPlayer.currentItem else { return }
-            let fraction = CMTimeGetSeconds(time) / CMTimeGetSeconds(currentItem.duration)
-            if !fraction.isNaN {
-                self.progressDidChange?(fraction)
-            }
+//            let progress = Progress(duration: CMTimeGetSeconds(currentItem.duration),
+//                                    currentTime: CMTimeGetSeconds(time))
+            let progress = Progress(duration: currentItem.duration,
+                                    currentTime: time)
+            self.progressDidChange?(progress)
         }
     }
     

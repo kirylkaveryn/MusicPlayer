@@ -14,7 +14,7 @@ protocol MPPlayerScreenPresenterProtocol: AnyObject {
     var songsImages: [UIImage] { get }
 
     var songDidChange: ((String, String) -> ())? { get set }
-    var progressDidChange: ((Double) -> ())? { get set }
+    var progressDidChange: ((Progress) -> ())? { get set }
 
     func bind()
     func playButtonDidTap()
@@ -40,7 +40,7 @@ class MPPlayerScreenPresenter: MPPlayerScreenPresenterProtocol {
     }
 
     var songDidChange: ((String, String) -> ())?
-    var progressDidChange: ((Double) -> ())?
+    var progressDidChange: ((Progress) -> ())?
 
     init(audioPlayer: MPAudioPlayerProtocol) {
         self.audioPlayer = audioPlayer
