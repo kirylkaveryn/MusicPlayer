@@ -26,6 +26,8 @@
 		EDDDAD1F28C52032008207BF /* song1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDDAD1C28C52032008207BF /* song1.mp3 */; };
 		EDDDAD2128C52B57008207BF /* song3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDDAD2028C52B56008207BF /* song3.mp3 */; };
 		EDDDAD2428C62948008207BF /* CMTime+StringRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD2328C62948008207BF /* CMTime+StringRepresentation.swift */; };
+		EDDDAD2628C62D4D008207BF /* MPProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD2528C62D4D008207BF /* MPProgressView.swift */; };
+		EDDDAD2828C64ED2008207BF /* MPPlayerControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD2728C64ED2008207BF /* MPPlayerControlButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +71,8 @@
 		EDDDAD1C28C52032008207BF /* song1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song1.mp3; path = ../../../song1.mp3; sourceTree = "<group>"; };
 		EDDDAD2028C52B56008207BF /* song3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song3.mp3; path = ../../../song3.mp3; sourceTree = "<group>"; };
 		EDDDAD2328C62948008207BF /* CMTime+StringRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime+StringRepresentation.swift"; sourceTree = "<group>"; };
+		EDDDAD2528C62D4D008207BF /* MPProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPProgressView.swift; sourceTree = "<group>"; };
+		EDDDAD2728C64ED2008207BF /* MPPlayerControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPPlayerControlButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,23 +155,22 @@
 		EDDDAD0A28C4EBAE008207BF /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				EDDDAD2928C68097008207BF /* CustomUIElements */,
 				EDDDACE028C4E7AB008207BF /* Main.storyboard */,
 				EDDDAD1428C50B8C008207BF /* MPPlayerScreenPresenter.swift */,
 				EDDDACDE28C4E7AB008207BF /* MPPlayerScreenViewController.swift */,
-				EDDDAD0B28C4EC02008207BF /* MPCorouselViewFlowLayout.swift */,
-				EDDDAD0D28C4EC7C008207BF /* MPCorouselCollectionView.swift */,
-				EDDDAD0F28C509B9008207BF /* Cell */,
+				EDDDAD2528C62D4D008207BF /* MPProgressView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
 		};
-		EDDDAD0F28C509B9008207BF /* Cell */ = {
+		EDDDAD0F28C509B9008207BF /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				EDDDAD1028C509D5008207BF /* MPCorouselCollectionViewCell.swift */,
 				EDDDAD1128C509D5008207BF /* MPCorouselCollectionViewCell.xib */,
 			);
-			path = Cell;
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		EDDDAD1628C51910008207BF /* Services */ = {
@@ -195,6 +198,17 @@
 				EDDDAD2328C62948008207BF /* CMTime+StringRepresentation.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		EDDDAD2928C68097008207BF /* CustomUIElements */ = {
+			isa = PBXGroup;
+			children = (
+				EDDDAD0F28C509B9008207BF /* Cells */,
+				EDDDAD0B28C4EC02008207BF /* MPCorouselViewFlowLayout.swift */,
+				EDDDAD0D28C4EC7C008207BF /* MPCorouselCollectionView.swift */,
+				EDDDAD2728C64ED2008207BF /* MPPlayerControlButton.swift */,
+			);
+			path = CustomUIElements;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -340,6 +354,8 @@
 				EDDDAD0E28C4EC7C008207BF /* MPCorouselCollectionView.swift in Sources */,
 				EDDDAD2428C62948008207BF /* CMTime+StringRepresentation.swift in Sources */,
 				EDDDAD1228C509D5008207BF /* MPCorouselCollectionViewCell.swift in Sources */,
+				EDDDAD2828C64ED2008207BF /* MPPlayerControlButton.swift in Sources */,
+				EDDDAD2628C62D4D008207BF /* MPProgressView.swift in Sources */,
 				EDDDAD1828C51921008207BF /* MPAudioPlayer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -15,9 +15,9 @@ class MPPlayerScreenViewController: UIViewController {
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var playedTime: UILabel!
     @IBOutlet weak var remainingTIme: UILabel!
-    @IBOutlet weak var backwardPlayerButton: UIButton!
-    @IBOutlet weak var playPlayerButtom: UIButton!
-    @IBOutlet weak var forwardPlayerButton: UIButton!
+    @IBOutlet weak var backwardPlayerButton: MPPlayerControlButton!
+    @IBOutlet weak var playPlayerButton: MPPlayerControlButton!
+    @IBOutlet weak var forwardPlayerButton: MPPlayerControlButton!
     @IBOutlet weak var progressBar: UIProgressView!
     
     private var presenter: MPPlayerScreenPresenterProtocol?
@@ -26,6 +26,8 @@ class MPPlayerScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupButtons()
         setupCollectionView()
         
         presenter?.bind()
@@ -45,11 +47,17 @@ class MPPlayerScreenViewController: UIViewController {
             let fraction = CMTimeGetSeconds(progress.currentTime) / CMTimeGetSeconds(progress.duration)
             // handle unexpected NaN value
             if !fraction.isNaN {
-                self.progressBar.progress = Float(fraction)
+                self.progressBar.setProgress(Float(fraction), animated: true)
                 self.playedTime.text = progress.currentTime.positionalTime
                 self.remainingTIme.text = (progress.duration - progress.currentTime).positionalTime
             }
         }
+    }
+    
+    private func setupButtons() {
+        forwardPlayerButton.confugure(style: .goForward, size: .standart)
+        backwardPlayerButton.confugure(style: .goBack, size: .standart)
+        playPlayerButton.confugure(style: .play, size: .big)
     }
 
     private func setupCollectionView() {
@@ -58,6 +66,10 @@ class MPPlayerScreenViewController: UIViewController {
         collectionView.register(UINib(nibName: MPCorouselCollectionViewCell.nibName, bundle: nil), forCellWithReuseIdentifier: MPCorouselCollectionViewCell.reuseID)
     }
     
+//    private func setupProgressBar() {
+////        progressBar.progressImage = UIImage(systemName: "circle.fill")
+//    }
+//
     
     @IBAction func playButtonDidTap(_ sender: Any) {
         presenter?.playButtonDidTap()

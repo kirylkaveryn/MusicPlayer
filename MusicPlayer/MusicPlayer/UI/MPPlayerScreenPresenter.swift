@@ -35,7 +35,7 @@ class MPPlayerScreenPresenter: MPPlayerScreenPresenterProtocol {
     
     var songsImages: [UIImage] {
         get {
-            audioPlayer.songs.map { $0.image }
+            audioPlayer.songs.map { $0.artwork }
         }
     }
 
@@ -55,7 +55,6 @@ class MPPlayerScreenPresenter: MPPlayerScreenPresenterProtocol {
     }
     
     func bind() {
-        
         // stubbed song data
         let songURLs: [URL] = [
             Bundle.main.url(forResource: "song1", withExtension: "mp3")!,

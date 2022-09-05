@@ -12,8 +12,7 @@ import UIKit
 struct MPSongModel {
     let title: String
     let artist: String
-    let duration: TimeInterval
-    let image: UIImage = UIImage(systemName: "person")!
+    let artwork: UIImage
 }
 
 struct Progress {
@@ -50,7 +49,6 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
             // create new player and start playing
             audioPlayer.replaceCurrentItem(with: currentItem)
             songDidChange?(self.songs[currentItemIndex])
-            audioPlayer.play()
         }
     }
     private var currentItemIndex: Int? {
@@ -61,19 +59,8 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
     }
     
     var songs: [MPSongModel] {
-        // FIXME: - parser from AVPlayerItem to MPSongModel
         get {
-            [
-                MPSongModel(title: "title1",
-                            artist: "artist1",
-                            duration: 1),
-                MPSongModel(title: "title2",
-                            artist: "artist2",
-                            duration: 1),
-                MPSongModel(title: "title3",
-                            artist: "artist3",
-                            duration: 1)
-            ]
+            playerItems.map { getSongModelFrom($0) }
         }
     }
     
@@ -92,9 +79,8 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         // sutup progress bar updating with timer
         audioPlayer.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 60), queue: .main) { [weak self] time in
             guard let self = self, let currentItem = self.audioPlayer.currentItem else { return }
-//            let progress = Progress(duration: CMTimeGetSeconds(currentItem.duration),
-//                                    currentTime: CMTimeGetSeconds(time))
-            let progress = Progress(duration: currentItem.duration,
+            print(currentItem.asset.duration)
+            let progress = Progress(duration: currentItem.asset.duration,
                                     currentTime: time)
             self.progressDidChange?(progress)
         }
@@ -106,6 +92,10 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         }
         guard let firstItem = playerItems.first else { return print("There is no songs") }
         currentItem = firstItem
+        // play and pause is used bucause of AVPlayerItem.duration is available
+        // only after starting of playing
+        play()
+        pause()
     }
 
     func play() {
@@ -125,6 +115,7 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         } else if currentItemIndex == (playerItems.count - 1) {
             currentItem = playerItems.first!
         }
+        play()
     }
     
     /// Will play previous song. Is song is first in queue, will play last.
@@ -136,7 +127,27 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         } else if currentItemIndex == 0 {
             currentItem = playerItems.last!
         }
+        play()
     }
     
+    /// Parse AVPlayerItem to MPSongModel with asset keys.
+    private func getSongModelFrom(_ playerItem: AVPlayerItem) -> MPSongModel {
+        
+        let title = AVMetadataItem.metadataItems(from: playerItem.asset.commonMetadata, withKey: AVMetadataKey.commonKeyTitle, keySpace: AVMetadataKeySpace.common).first?.value as? String
+        let artist = AVMetadataItem.metadataItems(from: playerItem.asset.commonMetadata, withKey: AVMetadataKey.commonKeyArtist, keySpace: AVMetadataKeySpace.common).first?.value as? String
+        let artworkData = AVMetadataItem.metadataItems(from: playerItem.asset.commonMetadata, withKey: AVMetadataKey.commonKeyArtwork, keySpace: AVMetadataKeySpace.common).first?.value as? Data
+        
+        var artwork: UIImage
+        if let artworkData = artworkData {
+            artwork = UIImage(data: artworkData) ?? UIImage(systemName: "person")!
+        } else {
+            artwork = UIImage(systemName: "person")!
+        }
+
+        let songModel = MPSongModel(title: title ?? "unknown",
+                    artist: artist ?? "unknown",
+                    artwork: artwork)
+        return songModel
+    }
 }
 
