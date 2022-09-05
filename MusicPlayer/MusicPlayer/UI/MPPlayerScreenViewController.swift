@@ -19,7 +19,7 @@ class MPPlayerScreenViewController: UIViewController {
     @IBOutlet weak var forwardPlayerButton: UIButton!
     @IBOutlet weak var progressBar: UIProgressView!
     
-    private var presenter: MPPlayerScreenPresenterProcol?
+    private var presenter: MPPlayerScreenPresenterProtocol?
     private let interitemSpace: CGFloat = 30
     private let cellContentInset = UIEdgeInsets(top: 60, left: 60, bottom: 60, right: 60)
     
@@ -27,19 +27,16 @@ class MPPlayerScreenViewController: UIViewController {
         super.viewDidLoad()
         setupCollectionView()
         
-        guard let initaialSongModel = presenter?.songs.first else { return }
-        self.songLabel.text = initaialSongModel.title
-        self.artistLabel.text = initaialSongModel.title
-        
+        presenter?.bind()
     }
     
-    func configure(presenter: MPPlayerScreenPresenterProcol) {
+    func configure(presenter: MPPlayerScreenPresenterProtocol) {
         self.presenter = presenter
 
-        presenter.songDidChange = { [weak self] songModel in
+        presenter.songDidChange = { [weak self] title, artist in
             guard let self = self else { return }
-            self.songLabel.text = songModel.title
-            self.artistLabel.text = songModel.title
+            self.songLabel.text = title
+            self.artistLabel.text = artist
         }
     }
 

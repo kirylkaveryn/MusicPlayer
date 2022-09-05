@@ -9,17 +9,18 @@ import Foundation
 import AVKit
 
 
-protocol MPPlayerScreenPresenterProcol: AnyObject {
+protocol MPPlayerScreenPresenterProtocol: AnyObject {
     var songs: [MPSongModel] { get }
-    var songDidChange: ((MPSongModel) -> ())? { get set }
+    var songDidChange: ((String, String) -> ())? { get set }
     
+    func bind()
     func playButtonDidTap()
     func pauseButtonDidTap()
     func backwardButtonDidTap()
     func forwardButtonDidTap()
 }
 
-class MPPlayerScreenPresenter: MPPlayerScreenPresenterProcol {
+class MPPlayerScreenPresenter: MPPlayerScreenPresenterProtocol {
     
     private var audioPlayer: MPAudioPlayerProtocol
    
@@ -29,14 +30,26 @@ class MPPlayerScreenPresenter: MPPlayerScreenPresenterProcol {
         }
     }
 
-    var songDidChange: ((MPSongModel) -> ())?
+    var songDidChange: ((String, String) -> ())?
     
     init(audioPlayer: MPAudioPlayerProtocol) {
         self.audioPlayer = audioPlayer
         self.audioPlayer.songDidChange = { [weak self] songModel in
             guard let self = self else { return }
-            self.songDidChange?(songModel)
+            self.songDidChange?(songModel.title, songModel.artist)
         }
+    }
+    
+    func bind() {
+        
+        // stubbed song data
+        let songURLs: [URL] = [
+            Bundle.main.url(forResource: "song1", withExtension: "mp3")!,
+            Bundle.main.url(forResource: "song2", withExtension: "mp3")!,
+            Bundle.main.url(forResource: "song3", withExtension: "mp3")!
+        ]
+        
+        audioPlayer.setupPlayer(songURLs: songURLs)
     }
     
     func playButtonDidTap() {
