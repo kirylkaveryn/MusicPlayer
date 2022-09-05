@@ -25,7 +25,7 @@ class MPCorouselCollectionViewCell: UICollectionViewCell {
         contentView.clipsToBounds = false
     }
     
-    func configure(image: UIImage) {
+    func configure(image: UIImage?) {
         albumImageView.image = image
     }
 

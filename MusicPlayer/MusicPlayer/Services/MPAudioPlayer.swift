@@ -7,17 +7,20 @@
 
 import Foundation
 import AVFoundation
+import UIKit
 
 struct MPSongModel {
     let title: String
     let artist: String
     let duration: TimeInterval
+    let image: UIImage = UIImage(systemName: "person")!
 }
 
 
 protocol MPAudioPlayerProtocol {
     var songs: [MPSongModel] { get }
     var songDidChange: ((MPSongModel) -> ())? { get set }
+    var progressDidChange: ((Double) -> ())? { get set }
 
     func setupPlayer(songURLs: [URL])
     func play()
@@ -28,21 +31,23 @@ protocol MPAudioPlayerProtocol {
 
 class MPAudioPlayer: MPAudioPlayerProtocol {
     var songDidChange: ((MPSongModel) -> ())?
-    
+    var progressDidChange: ((Double) -> ())?
+
     private var audioPlayer: AVPlayer
     private var playerItems: [AVPlayerItem] = []
     private var currentItem: AVPlayerItem? {
+        willSet {
+            // roll back item playing progress
+            currentItem?.seek(to: .zero) { _ in }
+        }
         didSet {
             guard let currentItem = currentItem,
                   let currentItemIndex = currentItemIndex else { return }
-            // create new player and roll back playing progress
+            // create new player
             audioPlayer.replaceCurrentItem(with: currentItem)
-            currentItem.seek(to: .zero) { [weak self] _ in
-                guard let self = self else { return }
-                // start playing and update subscribers
-                self.audioPlayer.play()
-                self.songDidChange?(self.songs[currentItemIndex])
-            }
+            
+            self.songDidChange?(self.songs[currentItemIndex])
+            self.audioPlayer.play()
         }
     }
     private var currentItemIndex: Int? {
@@ -80,6 +85,15 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         try? AVAudioSession.sharedInstance().setActive(true)
         audioPlayer = AVPlayer(playerItem: nil)
+        
+        // sutup progress bar updating with timer
+        audioPlayer.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1, preferredTimescale: 60), queue: .main) { [weak self] time in
+            guard let self = self, let currentItem = self.audioPlayer.currentItem else { return }
+            let fraction = CMTimeGetSeconds(time) / CMTimeGetSeconds(currentItem.duration)
+            if !fraction.isNaN {
+                self.progressDidChange?(fraction)
+            }
+        }
     }
     
     func setupPlayer(songURLs: [URL]) {

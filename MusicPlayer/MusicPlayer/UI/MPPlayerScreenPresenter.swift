@@ -10,9 +10,12 @@ import AVKit
 
 
 protocol MPPlayerScreenPresenterProtocol: AnyObject {
-    var songs: [MPSongModel] { get }
+    var songsCount: Int { get }
+    var songsImages: [UIImage] { get }
+
     var songDidChange: ((String, String) -> ())? { get set }
-    
+    var progressDidChange: ((Double) -> ())? { get set }
+
     func bind()
     func playButtonDidTap()
     func pauseButtonDidTap()
@@ -24,19 +27,30 @@ class MPPlayerScreenPresenter: MPPlayerScreenPresenterProtocol {
     
     private var audioPlayer: MPAudioPlayerProtocol
    
-    var songs: [MPSongModel] {
+    var songsCount: Int {
         get {
-            audioPlayer.songs
+            audioPlayer.songs.count
+        }
+    }
+    
+    var songsImages: [UIImage] {
+        get {
+            audioPlayer.songs.map { $0.image }
         }
     }
 
     var songDidChange: ((String, String) -> ())?
-    
+    var progressDidChange: ((Double) -> ())?
+
     init(audioPlayer: MPAudioPlayerProtocol) {
         self.audioPlayer = audioPlayer
         self.audioPlayer.songDidChange = { [weak self] songModel in
             guard let self = self else { return }
             self.songDidChange?(songModel.title, songModel.artist)
+        }
+        self.audioPlayer.progressDidChange = { [weak self] progress in
+            guard let self = self else { return }
+            self.progressDidChange?(progress)
         }
     }
     

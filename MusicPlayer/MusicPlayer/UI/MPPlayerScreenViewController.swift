@@ -38,6 +38,11 @@ class MPPlayerScreenViewController: UIViewController {
             self.songLabel.text = title
             self.artistLabel.text = artist
         }
+        
+        presenter.progressDidChange = { [weak self] progress in
+            guard let self = self else { return }
+            self.progressBar.progress = Float(progress)
+        }
     }
 
     private func setupCollectionView() {
@@ -64,11 +69,12 @@ class MPPlayerScreenViewController: UIViewController {
 // MARK: CollectionView DataSource
 extension MPPlayerScreenViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        presenter?.songs.count ?? 0
+        presenter?.songsCount ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MPCorouselCollectionViewCell.reuseID, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MPCorouselCollectionViewCell.reuseID, for: indexPath) as! MPCorouselCollectionViewCell
+        cell.configure(image: presenter?.songsImages[indexPath.item])
         return cell
     }
 }
