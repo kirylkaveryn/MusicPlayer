@@ -27,6 +27,8 @@
 		EDDDAD2128C52B57008207BF /* song3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDDDAD2028C52B56008207BF /* song3.mp3 */; };
 		EDDDAD2428C62948008207BF /* CMTime+StringRepresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD2328C62948008207BF /* CMTime+StringRepresentation.swift */; };
 		EDDDAD2828C64ED2008207BF /* MPPlayerControlButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD2728C64ED2008207BF /* MPPlayerControlButton.swift */; };
+		EDDDAD3028C69D92008207BF /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDDDAD2C28C69C37008207BF /* Montserrat-Medium.ttf */; };
+		EDDDAD3428C75CD1008207BF /* MPResourceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDDDAD3328C75CD1008207BF /* MPResourceService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,11 +68,13 @@
 		EDDDAD1128C509D5008207BF /* MPCorouselCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MPCorouselCollectionViewCell.xib; sourceTree = "<group>"; };
 		EDDDAD1428C50B8C008207BF /* MPPlayerScreenPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPlayerScreenPresenter.swift; sourceTree = "<group>"; };
 		EDDDAD1728C51921008207BF /* MPAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAudioPlayer.swift; sourceTree = "<group>"; };
-		EDDDAD1B28C52032008207BF /* song2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song2.mp3; path = ../../../song2.mp3; sourceTree = "<group>"; };
-		EDDDAD1C28C52032008207BF /* song1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song1.mp3; path = ../../../song1.mp3; sourceTree = "<group>"; };
-		EDDDAD2028C52B56008207BF /* song3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song3.mp3; path = ../../../song3.mp3; sourceTree = "<group>"; };
+		EDDDAD1B28C52032008207BF /* song2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song2.mp3; sourceTree = "<group>"; };
+		EDDDAD1C28C52032008207BF /* song1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song1.mp3; sourceTree = "<group>"; };
+		EDDDAD2028C52B56008207BF /* song3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = song3.mp3; sourceTree = "<group>"; };
 		EDDDAD2328C62948008207BF /* CMTime+StringRepresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CMTime+StringRepresentation.swift"; sourceTree = "<group>"; };
 		EDDDAD2728C64ED2008207BF /* MPPlayerControlButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPPlayerControlButton.swift; sourceTree = "<group>"; };
+		EDDDAD2C28C69C37008207BF /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
+		EDDDAD3328C75CD1008207BF /* MPResourceService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPResourceService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -173,8 +177,8 @@
 		EDDDAD1628C51910008207BF /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				EDDDAD1728C51921008207BF /* MPAudioPlayer.swift */,
-				EDDDAD2228C62926008207BF /* Extensions */,
+				EDDDAD3228C75CAA008207BF /* ResourсeService */,
+				EDDDAD3128C75C9D008207BF /* AudioPlayer */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -182,9 +186,8 @@
 		EDDDAD1928C5201F008207BF /* Resourses */ = {
 			isa = PBXGroup;
 			children = (
-				EDDDAD1C28C52032008207BF /* song1.mp3 */,
-				EDDDAD1B28C52032008207BF /* song2.mp3 */,
-				EDDDAD2028C52B56008207BF /* song3.mp3 */,
+				EDDDAD2B28C69BCF008207BF /* Fonts */,
+				EDDDAD2D28C69C73008207BF /* Songs */,
 			);
 			path = Resourses;
 			sourceTree = "<group>";
@@ -206,6 +209,41 @@
 				EDDDAD2728C64ED2008207BF /* MPPlayerControlButton.swift */,
 			);
 			path = CustomUIElements;
+			sourceTree = "<group>";
+		};
+		EDDDAD2B28C69BCF008207BF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				EDDDAD2C28C69C37008207BF /* Montserrat-Medium.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		EDDDAD2D28C69C73008207BF /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+				EDDDAD1C28C52032008207BF /* song1.mp3 */,
+				EDDDAD1B28C52032008207BF /* song2.mp3 */,
+				EDDDAD2028C52B56008207BF /* song3.mp3 */,
+			);
+			path = Songs;
+			sourceTree = "<group>";
+		};
+		EDDDAD3128C75C9D008207BF /* AudioPlayer */ = {
+			isa = PBXGroup;
+			children = (
+				EDDDAD1728C51921008207BF /* MPAudioPlayer.swift */,
+				EDDDAD2228C62926008207BF /* Extensions */,
+			);
+			path = AudioPlayer;
+			sourceTree = "<group>";
+		};
+		EDDDAD3228C75CAA008207BF /* ResourсeService */ = {
+			isa = PBXGroup;
+			children = (
+				EDDDAD3328C75CD1008207BF /* MPResourceService.swift */,
+			);
+			path = "ResourсeService";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,6 +356,7 @@
 				EDDDACE428C4E7AD008207BF /* Assets.xcassets in Resources */,
 				EDDDAD1328C509D5008207BF /* MPCorouselCollectionViewCell.xib in Resources */,
 				EDDDACE228C4E7AB008207BF /* Main.storyboard in Resources */,
+				EDDDAD3028C69D92008207BF /* Montserrat-Medium.ttf in Resources */,
 				EDDDAD1F28C52032008207BF /* song1.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -345,6 +384,7 @@
 			files = (
 				EDDDAD1528C50B8C008207BF /* MPPlayerScreenPresenter.swift in Sources */,
 				EDDDACDF28C4E7AB008207BF /* MPPlayerScreenViewController.swift in Sources */,
+				EDDDAD3428C75CD1008207BF /* MPResourceService.swift in Sources */,
 				EDDDACDB28C4E7AB008207BF /* AppDelegate.swift in Sources */,
 				EDDDACDD28C4E7AB008207BF /* SceneDelegate.swift in Sources */,
 				EDDDAD0C28C4EC02008207BF /* MPCorouselViewFlowLayout.swift in Sources */,

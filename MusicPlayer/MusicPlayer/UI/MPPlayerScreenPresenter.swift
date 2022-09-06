@@ -10,10 +10,10 @@ import AVKit
 
 
 protocol MPPlayerScreenPresenterProtocol: AnyObject {
-    var songsCount: Int { get }
-    var songsImages: [UIImage] { get }
+    var tracksCount: Int { get }
+    var tracksImages: [UIImage] { get }
 
-    var songDidChange: ((String, String) -> ())? { get set }
+    var trackDidChange: ((String, String, Int) -> ())? { get set }
     var progressDidChange: ((Progress) -> ())? { get set }
 
     func bind()
@@ -26,28 +26,32 @@ protocol MPPlayerScreenPresenterProtocol: AnyObject {
 
 class MPPlayerScreenPresenter: MPPlayerScreenPresenterProtocol {
     
+    private var resourсeService: MPResourсeServiceProtocol
     private var audioPlayer: MPAudioPlayerProtocol
    
-    var songsCount: Int {
+    var tracksCount: Int {
         get {
-            audioPlayer.songs.count
+            audioPlayer.tracks.count
         }
     }
     
-    var songsImages: [UIImage] {
+    var tracksImages: [UIImage] {
         get {
-            audioPlayer.songs.map { $0.artwork }
+            audioPlayer.tracks.map { $0.artwork }
         }
     }
 
-    var songDidChange: ((String, String) -> ())?
+    var trackDidChange: ((String, String, Int) -> ())?
     var progressDidChange: ((Progress) -> ())?
 
-    init(audioPlayer: MPAudioPlayerProtocol) {
+    init(resourceService: MPResourсeServiceProtocol, audioPlayer: MPAudioPlayerProtocol) {
+        self.resourсeService = resourceService
         self.audioPlayer = audioPlayer
-        self.audioPlayer.songDidChange = { [weak self] songModel in
+        
+        // setup binding closures
+        self.audioPlayer.trackDidChange = { [weak self] trackModel, index in
             guard let self = self else { return }
-            self.songDidChange?(songModel.title, songModel.artist)
+            self.trackDidChange?(trackModel.title, trackModel.artist, index)
         }
         self.audioPlayer.progressDidChange = { [weak self] progress in
             guard let self = self else { return }
@@ -56,14 +60,8 @@ class MPPlayerScreenPresenter: MPPlayerScreenPresenterProtocol {
     }
     
     func bind() {
-        // stubbed song data
-        let songURLs: [URL] = [
-            Bundle.main.url(forResource: "song1", withExtension: "mp3")!,
-            Bundle.main.url(forResource: "song2", withExtension: "mp3")!,
-            Bundle.main.url(forResource: "song3", withExtension: "mp3")!
-        ]
-        
-        audioPlayer.setupPlayer(songURLs: songURLs)
+        guard let tracksURLs = resourсeService.fetchTracksURL() else { return }
+        audioPlayer.setupPlayer(tracksURLs: tracksURLs)
     }
     
     func playButtonDidTap() {

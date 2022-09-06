@@ -8,6 +8,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Montserrat-Medium.ttf">
+            <string>Montserrat-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Player Screen View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -19,36 +24,36 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fde-47-biw">
-                                <rect key="frame" x="20" y="508" width="374" height="24"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <rect key="frame" x="20" y="478" width="374" height="24.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="20"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6MZ-b9-oMp">
-                                <rect key="frame" x="20" y="542" width="374" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="20" y="512.5" width="374" height="17.5"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="14"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="UvG-TZ-SCC">
-                                <rect key="frame" x="20" y="589" width="374" height="2.5"/>
+                                <rect key="frame" x="20" y="560" width="374" height="2.5"/>
                                 <color key="progressTintColor" red="0.50980392156862742" green="0.3411764705882353" blue="0.90588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="trackTintColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K6T-D7-H5s">
-                                <rect key="frame" x="20" y="595.5" width="34" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <rect key="frame" x="20" y="566.5" width="35" height="15"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="12"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remaining" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRG-qi-GHy">
-                                <rect key="frame" x="335" y="595.5" width="59" height="14.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRG-qi-GHy">
+                                <rect key="frame" x="359" y="566.5" width="35" height="15"/>
+                                <fontDescription key="fontDescription" name="Montserrat-Medium" family="Montserrat" pointSize="12"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="pye-KT-WKh">
-                                <rect key="frame" x="100" y="670.5" width="214" height="100"/>
+                                <rect key="frame" x="100" y="641.5" width="214" height="100"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y9G-Vs-nXV" customClass="MPPlayerControlButton" customModule="MusicPlayer" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="34.5" width="42.5" height="31"/>
@@ -83,7 +88,7 @@
                                 </constraints>
                             </stackView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pyv-X8-T4b" customClass="MPCorouselCollectionView" customModule="MusicPlayer" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="94" width="414" height="414"/>
+                                <rect key="frame" x="0.0" y="64" width="414" height="414"/>
                                 <color key="backgroundColor" red="0.30840110780000002" green="0.5618229508" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="pyv-X8-T4b" secondAttribute="height" multiplier="1:1" id="BhM-QH-K75"/>
@@ -95,7 +100,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.11372549019607843" green="0.090196078431372548" blue="0.14901960784313725" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="pyv-X8-T4b" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="0HJ-4t-eKy"/>
+                            <constraint firstItem="pyv-X8-T4b" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="0HJ-4t-eKy"/>
                             <constraint firstItem="6MZ-b9-oMp" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="5Wg-29-IHN"/>
                             <constraint firstItem="pyv-X8-T4b" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="C9W-w5-5Wd"/>
                             <constraint firstItem="bRG-qi-GHy" firstAttribute="trailing" secondItem="UvG-TZ-SCC" secondAttribute="trailing" id="FgZ-vN-KzD"/>
@@ -125,7 +130,7 @@
                         <outlet property="playedTime" destination="K6T-D7-H5s" id="hLX-cB-jm9"/>
                         <outlet property="progressBar" destination="UvG-TZ-SCC" id="x67-kQ-Spk"/>
                         <outlet property="remainingTIme" destination="bRG-qi-GHy" id="u9y-9F-ppU"/>
-                        <outlet property="songLabel" destination="Fde-47-biw" id="ml4-CZ-Nu2"/>
+                        <outlet property="trackLabel" destination="Fde-47-biw" id="ml4-CZ-Nu2"/>
                     </connections>
                 </viewController>
             </objects>

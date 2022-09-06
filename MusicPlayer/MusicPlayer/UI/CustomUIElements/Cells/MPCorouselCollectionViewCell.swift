@@ -24,7 +24,7 @@ class MPCorouselCollectionViewCell: UICollectionViewCell {
         contentView.backgroundColor = .white.withAlphaComponent(0.1)
         contentView.layer.borderColor = UIColor.white.withAlphaComponent(0.1).cgColor
         contentView.layer.borderWidth = 2
-        contentView.layer.cornerRadius = 20
+        contentView.layer.cornerRadius = 10
         contentView.layer.cornerCurve = .continuous
         contentView.clipsToBounds = true
     }

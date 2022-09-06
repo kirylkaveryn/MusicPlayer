@@ -25,8 +25,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let rootViewController = storyboard.instantiateInitialViewController() as! MPPlayerScreenViewController
         
+        // setup initial services and audio player and inject in Presenter
+        let resourсeService = MPResourсeService()
         let audioPlayer = MPAudioPlayer()
-        let presenter = MPPlayerScreenPresenter(audioPlayer: audioPlayer)
+        let presenter = MPPlayerScreenPresenter(resourceService: resourсeService,
+                                                audioPlayer: audioPlayer)
         rootViewController.configure(presenter: presenter)
         return rootViewController
     }
