@@ -22,7 +22,8 @@ struct Progress {
 
 protocol MPAudioPlayerProtocol {
     var tracks: [MPTrackModel] { get }
-    var trackDidChange: ((MPTrackModel, Int) -> ())? { get set }
+    
+    var trackDidChange: ((MPTrackModel) -> ())? { get set }
     var progressDidChange: ((Progress) -> ())? { get set }
 
     func setupPlayer(tracksURLs: [URL])
@@ -30,11 +31,11 @@ protocol MPAudioPlayerProtocol {
     func pause()
     func goForward()
     func goBack()
-    func goToSong(inex: Int)
+    func goToTrack(index: Int)
 }
 
 class MPAudioPlayer: MPAudioPlayerProtocol {
-    var trackDidChange: ((MPTrackModel, Int) -> ())?
+    var trackDidChange: ((MPTrackModel) -> ())?
     var progressDidChange: ((Progress) -> ())?
 
     private var audioPlayer: AVPlayer
@@ -49,7 +50,7 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
                   let currentItemIndex = currentItemIndex else { return }
             // create new player and update subscribers
             audioPlayer.replaceCurrentItem(with: currentItem)
-            trackDidChange?(tracks[currentItemIndex], currentItemIndex)
+            trackDidChange?(tracks[currentItemIndex])
         }
     }
     private var currentItemIndex: Int? {
@@ -95,8 +96,8 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         }
         guard let firstItem = playerItems.first else { return print("There is no tracks") }
         currentItem = firstItem
-        // play and pause is used bucause of AVPlayerItem.duration is available
-        // only after starting of playing
+        // play and pause is used bucause of AVPlayerItem.duration
+        // is available only after starting of playing
         play()
         pause()
     }
@@ -118,9 +119,9 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         } else if currentItemIndex == (playerItems.count - 1) {
             currentItem = playerItems.first!
         }
-        if isPlaying {
-            play()
-        }
+        // cuntinue playing when previous track was played
+        if isPlaying { play() }
+
     }
     
     /// Will play previous track. Is track is first in queue, will play last.
@@ -132,14 +133,14 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         } else if currentItemIndex == 0 {
             currentItem = playerItems.last!
         }
-        if isPlaying {
-            play()
-        }
+        // cuntinue playing when previous track was played
+        if isPlaying { play() }
+        
     }
     
-    func goToSong(inex: Int) {
-        guard (0...playerItems.count - 1).contains(inex) else { return }
-        currentItem = playerItems[inex]
+    func goToTrack(index: Int) {
+        guard (0...playerItems.count - 1).contains(index) else { return }
+        currentItem = playerItems[index]
     }
     
     /// Parse AVPlayerItem to MPSongModel with asset keys.
@@ -149,13 +150,16 @@ class MPAudioPlayer: MPAudioPlayerProtocol {
         let artist = AVMetadataItem.metadataItems(from: playerItem.asset.commonMetadata, withKey: AVMetadataKey.commonKeyArtist, keySpace: AVMetadataKeySpace.common).first?.value as? String
         let artworkData = AVMetadataItem.metadataItems(from: playerItem.asset.commonMetadata, withKey: AVMetadataKey.commonKeyArtwork, keySpace: AVMetadataKeySpace.common).first?.value as? Data
         
+        // parse artwork image from metadata's data
         var artwork: UIImage
         if let artworkData = artworkData, let image = UIImage(data: artworkData) {
             artwork = image
         } else {
+            // default artwork image
             artwork = UIImage(systemName: "music.note.list")!
         }
-
+        
+        // setup new track model
         let trackModel = MPTrackModel(title: title ?? "unknown",
                     artist: artist ?? "unknown",
                     artwork: artwork)

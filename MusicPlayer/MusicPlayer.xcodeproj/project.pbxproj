@@ -125,7 +125,7 @@
 		EDDDACD928C4E7AB008207BF /* MusicPlayer */ = {
 			isa = PBXGroup;
 			children = (
-				EDDDAD1928C5201F008207BF /* Resourses */,
+				EDDDAD1928C5201F008207BF /* Assets */,
 				EDDDAD1628C51910008207BF /* Services */,
 				EDDDAD0A28C4EBAE008207BF /* UI */,
 				EDDDACDA28C4E7AB008207BF /* AppDelegate.swift */,
@@ -157,10 +157,8 @@
 		EDDDAD0A28C4EBAE008207BF /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				EDDDAD2928C68097008207BF /* CustomUIElements */,
 				EDDDACE028C4E7AB008207BF /* Main.storyboard */,
-				EDDDAD1428C50B8C008207BF /* MPPlayerScreenPresenter.swift */,
-				EDDDACDE28C4E7AB008207BF /* MPPlayerScreenViewController.swift */,
+				EDDDAD3528C79260008207BF /* PlayerScreen */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -183,13 +181,13 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
-		EDDDAD1928C5201F008207BF /* Resourses */ = {
+		EDDDAD1928C5201F008207BF /* Assets */ = {
 			isa = PBXGroup;
 			children = (
 				EDDDAD2B28C69BCF008207BF /* Fonts */,
 				EDDDAD2D28C69C73008207BF /* Songs */,
 			);
-			path = Resourses;
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		EDDDAD2228C62926008207BF /* Extensions */ = {
@@ -244,6 +242,16 @@
 				EDDDAD3328C75CD1008207BF /* MPResourceService.swift */,
 			);
 			path = "ResourсeService";
+			sourceTree = "<group>";
+		};
+		EDDDAD3528C79260008207BF /* PlayerScreen */ = {
+			isa = PBXGroup;
+			children = (
+				EDDDAD1428C50B8C008207BF /* MPPlayerScreenPresenter.swift */,
+				EDDDACDE28C4E7AB008207BF /* MPPlayerScreenViewController.swift */,
+				EDDDAD2928C68097008207BF /* CustomUIElements */,
+			);
+			path = PlayerScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

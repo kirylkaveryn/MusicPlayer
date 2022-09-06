@@ -45,21 +45,5 @@ class MPCorouselViewFlowLayout: UICollectionViewFlowLayout {
         collectionView.indexOfPresentedCell = Int(index)
         return point
     }
-    
-    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        guard let elements = super.layoutAttributesForElements(in: rect) else {
-            return nil
-        }
-        self.transformCell(cells: elements)
-        return elements
-    }
-    
-    func transformCell(cells: [UICollectionViewLayoutAttributes]) {
-        guard let collectionView = collectionView as? MPCorouselCollectionView else { return }
-        for cell in cells {
-            if cell.indexPath != IndexPath(row: Int(collectionView.indexOfPresentedCell), section: 0) {
-            }
-        }
-    }
-    
+
 }

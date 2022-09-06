@@ -30,6 +30,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let audioPlayer = MPAudioPlayer()
         let presenter = MPPlayerScreenPresenter(resourceService: resourсeService,
                                                 audioPlayer: audioPlayer)
+        
         rootViewController.configure(presenter: presenter)
         return rootViewController
     }

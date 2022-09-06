@@ -17,6 +17,7 @@ class MPPlayerScreenViewController: UIViewController {
     @IBOutlet weak var remainingTIme: UILabel!
     @IBOutlet weak var backwardPlayerButton: MPPlayerControlButton!
     @IBOutlet weak var playPlayerButton: MPPlayerControlButton!
+    @IBOutlet weak var pausePlayerButton: MPPlayerControlButton!
     @IBOutlet weak var forwardPlayerButton: MPPlayerControlButton!
     @IBOutlet weak var progressBar: UIProgressView!
     
@@ -31,18 +32,18 @@ class MPPlayerScreenViewController: UIViewController {
         setupButtons()
         setupCollectionView()
         
-        presenter?.bind()
+        presenter?.fetchTracks()
     }
     
     func configure(presenter: MPPlayerScreenPresenterProtocol) {
         self.presenter = presenter
 
-        presenter.trackDidChange = { [weak self] title, artist, index in
+        // setup callbacks from presenter
+        presenter.trackDidChange = { [weak self] title, artist in
             guard let self = self else { return }
             self.trackLabel.text = title
             self.artistLabel.text = artist
         }
-        
         presenter.progressDidChange = { [weak self] progress in
             guard let self = self else { return }
             let fraction = CMTimeGetSeconds(progress.currentTime) / CMTimeGetSeconds(progress.duration)
@@ -59,6 +60,8 @@ class MPPlayerScreenViewController: UIViewController {
         forwardPlayerButton.confugure(style: .goForward, size: .standart)
         backwardPlayerButton.confugure(style: .goBack, size: .standart)
         playPlayerButton.confugure(style: .play, size: .big)
+        pausePlayerButton.confugure(style: .pause, size: .big)
+        pausePlayerButton.isHidden = true
     }
 
     private func setupCollectionView() {
@@ -68,16 +71,22 @@ class MPPlayerScreenViewController: UIViewController {
     }
 
     @IBAction func playButtonDidTap(_ sender: Any) {
-        presenter?.playButtonDidTap()
+        playPlayerButton.isHidden = true
+        pausePlayerButton.isHidden = false
+        presenter?.setPlayback(.play)
+    }
+    
+    @IBAction func pauseButtonDidTap(_ sender: Any) {
+        playPlayerButton.isHidden = false
+        pausePlayerButton.isHidden = true
+        presenter?.setPlayback(.pause)
     }
     
     @IBAction func backwardButtonDidTap(_ sender: Any) {
-        presenter?.backwardButtonDidTap()
         scrollToIndex(index: collectionView.indexOfPresentedCell - 1)
     }
     
     @IBAction func forwardButtonDidTap(_ sender: Any) {
-        presenter?.forwardButtonDidTap()
         scrollToIndex(index: collectionView.indexOfPresentedCell + 1)
     }
     
@@ -127,7 +136,7 @@ extension MPPlayerScreenViewController: UICollectionViewDelegateFlowLayout {
         let presenter = presenter,
         let currentCell = collectionView.visibleCells.first else { return }
         
-        // delta is for UX
+        // delta is for UX (magic number %( )
         let delta: CGFloat = 50
         
         // get current cell width
@@ -148,11 +157,18 @@ extension MPPlayerScreenViewController: UICollectionViewDelegateFlowLayout {
         // should be calculated and set here
         let offset = collectionView.contentOffset.x / cellWidth
         let index = Int(round(offset))
-        collectionView.indexOfPresentedCell = index
+        self.collectionView.indexOfPresentedCell = index
     }
     
+    // this method is called only when user drag scrill manually
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        presenter?.goToSong(inex: collectionView.indexOfPresentedCell)
+        presenter?.goToTrack(.index(collectionView.indexOfPresentedCell))
+
+    }
+
+    // this method is called only when scrollView's method scrollToIem is called
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        presenter?.goToTrack(.index(collectionView.indexOfPresentedCell))
     }
 
 }
